@@ -1,5 +1,4 @@
 <html>
-
 <head>
     <script src="js/testJs.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
@@ -59,7 +58,8 @@
 
 <body>
     <button id="myBtn">Open Modal</button>
-
+    
+    <input type="button" value="click me" onClick="test()">
     <!-- The Modal -->
     <div id="myModal" class="modal">
 
@@ -98,6 +98,8 @@
             }
         }
 
-    </script>
-
+        function test(){
+                $('#test').popup("open")
+            }
+    </script>            
 </html>

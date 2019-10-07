@@ -9,25 +9,25 @@
                 $('#testModal').toggle();
             }
 
-            function modalMouseDown(element){
-                document.onmousemove = function(e){
-                    moveElement(e, element);
+            function modalMouseDown(e, element){
+                $(element).data('offSetX', e.offsetX);
+                $(element).data('offSetY', e.offsetY);
+                
+                document.onmousemove = function(f){
+                    moveElement(f, element);
                 }      
 
                 document.onmouseup = function(e){
                     document.onmousemove = null;
-                }          
-            }
+                }
 
-            function moveElement(e, element){
-                $(element).css({top: e.pageY, left: e.pageX});
-            }
+                function moveElement(e, element){
+                    var offSetX = $(element).data('offSetX');
+                    var offSetY = $(element).data('offSetY');
+                    $(element).css({top: e.pageY - offSetY, left: e.pageX - offSetX});
+                }
+            }       
 
-            function modalMouseMove(e){
-                if(mouseDown){
-                    $('#testModal').css({top: e.pageY, left: e.pageX});
-                }                
-            }
         </script>
 
         <style>
@@ -36,13 +36,15 @@
                 top: 100px;
                 left: 100px;
                 background-color: gray;
+                width: 100px;
+                height: 100px;
             }
         </style>
     </header>
 
     <body>
         <button onclick="toggleModal()">toggle modal</button>
-        <div id="testModal" onmousedown="modalMouseDown(this)">
+        <div id="testModal" onmousedown="modalMouseDown(event, this)">
             modal content
         </div>
     </body>

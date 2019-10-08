@@ -39,6 +39,15 @@
                 width: 100px;
                 height: 100px;
             }
+
+            #modal2{
+                position: absolute;
+                top: 300px;
+                left: 300px;
+                background-color: gray;
+                width: 100px;
+                height: 100px;
+            }
         </style>
     </header>
 
@@ -46,6 +55,10 @@
         <button onclick="toggleModal()">toggle modal</button>
         <div id="testModal" onmousedown="modalMouseDown(event, this)">
             modal content
+        </div>
+
+        <div id="modal2" onmousedown="modalMouseDown(event, this)">
+            modal content 2
         </div>
     </body>
 </html>

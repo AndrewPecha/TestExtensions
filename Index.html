@@ -5,60 +5,90 @@
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
         <script>
-            function toggleModal(){
-                $('#testModal').toggle();
+            function toggleElement(e, element){                
+                e.stopPropagation();
+                if(element === undefined)
+                    return;
+
+                $(element).toggle();
             }
 
-            function modalMouseDown(e, element){
+            function moveElement(e, element){
+                if(element.classList.contains("modalHeader"))
+                    element = element.parentElement;
                 $(element).data('offSetX', e.offsetX);
                 $(element).data('offSetY', e.offsetY);
                 
                 document.onmousemove = function(f){
-                    moveElement(f, element);
+                    setElementToEventCoords(f, element);
                 }      
 
                 document.onmouseup = function(e){
                     document.onmousemove = null;
-                }
+                }                
+            }       
 
-                function moveElement(e, element){
+            function setElementToEventCoords(e, element){
                     var offSetX = $(element).data('offSetX');
                     var offSetY = $(element).data('offSetY');
                     $(element).css({top: e.pageY - offSetY, left: e.pageX - offSetX});
-                }
-            }       
+            }
 
+            function findClassFromChild(element, classToFind){
+                if(element.classList.contains(classToFind))
+                    return element;
+
+                if(element.parentElement === undefined)
+                    return undefined;
+
+                return findClassFromChild(element.parentElement, classToFind);
+            }
+
+            function cancelParentOnMouseDown(e){
+                e.stopPropagation();
+            }
         </script>
 
         <style>
-            #testModal{
+            .modalHeader{
+                border-radius: inherit;
+                height: 30px;
+                border: solid black 1px;
+            }
+
+            .modal{
+                border-radius: 5px;
                 position: absolute;
                 top: 100px;
                 left: 100px;
-                background-color: gray;
-                width: 100px;
-                height: 100px;
+                background-color: lightgray;
+                width: 450px;
+                height: 300px;
+                -webkit-touch-callout: none;
+                -webkit-user-select: none;
+                -khtml-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
             }
 
-            #modal2{
-                position: absolute;
-                top: 300px;
-                left: 300px;
-                background-color: gray;
-                width: 100px;
-                height: 100px;
+            .modalCloseButton{
+                border-radius: inherit;
+                float: right;
+                padding: 5px 8px 6px 8px;
+                cursor: pointer;
             }
         </style>
     </header>
 
     <body>
-        <button onclick="toggleModal()">toggle modal</button>
-        <div id="testModal" onmousedown="modalMouseDown(event, this)">
-            modal content
-        </div>
-
-        <div id="modal2" onmousedown="modalMouseDown(event, this)">
-            modal content 2
+        <div id="testModal" class="modal">
+            <div id=testModalHeader class="modalHeader" onmousedown="moveElement(event, this)">
+                <div class="modalCloseButton" onmousedown="cancelParentOnMouseDown(event);" onclick="toggleElement(event, findClassFromChild(this, 'modal'))">X</div>
+            </div>
+            <div id=testModalContent>
+                modal content
+            </div>
         </div>
     </body>
 </html>

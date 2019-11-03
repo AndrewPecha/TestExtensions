@@ -1,10 +1,19 @@
 <html>
-    <header>
+    <head>
         <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
         <script>
+            function loadRemoteModalContent(url, modalId){
+                $.ajax({
+                    url: url,
+                    success: function(data){
+                        $('#'+ modalId + "Content").html(data);
+                    }
+                })
+            }
+
             function toggleElement(e, element){                
                 e.stopPropagation();
                 if(element === undefined)
@@ -14,6 +23,7 @@
             }
 
             function moveElement(e, element){
+                cancelParentOnMouseDown(e);
                 if(element.classList.contains("modalHeader"))
                     element = element.parentElement;
                 $(element).data('offSetX', e.offsetX);
@@ -47,13 +57,16 @@
             function cancelParentOnMouseDown(e){
                 e.stopPropagation();
             }
+
+            function changeModalContent(){
+                loadRemoteModalContent("https://www.google.com", "testModal");
+            }
         </script>
 
         <style>
             .modalHeader{
-                border-radius: inherit;
                 height: 30px;
-                border: solid black 1px;
+                border-bottom: solid black 1px;
             }
 
             .modal{
@@ -69,7 +82,7 @@
                 -khtml-user-select: none;
                 -moz-user-select: none;
                 -ms-user-select: none;
-                user-select: none;
+                border: solid black 1px;
             }
 
             .modalCloseButton{
@@ -79,9 +92,10 @@
                 cursor: pointer;
             }
         </style>
-    </header>
+    </head>
 
     <body>
+        <button onclick="changeModalContent();">Change Modal Content</button>
         <div id="testModal" class="modal">
             <div id=testModalHeader class="modalHeader" onmousedown="moveElement(event, this)">
                 <div class="modalCloseButton" onmousedown="cancelParentOnMouseDown(event);" onclick="toggleElement(event, findClassFromChild(this, 'modal'))">X</div>

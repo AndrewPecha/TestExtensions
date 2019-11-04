@@ -4,101 +4,37 @@
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
         crossorigin="anonymous"></script>
+        <script src="js/pechdo.js"></script>
         <script>
-            function loadRemoteModalContent(url, modalId){
-                $.ajax({
-                    url: url,
-                    success: function(data){
-                        $('#'+ modalId + "Content").html(data);
-                    }
-                })
+        
+            window.onload = function(){
+                createWindow({
+                    modalContent: "content from options",
+                    modalId: "testModal2"
+                });
+
+                createWindow({
+                    modalContent: "content from options for testModal3",
+                    modalId: "testModal3"
+                });
             }
-
-            function toggleElement(e, element){                
-                e.stopPropagation();
-                if(element === undefined)
-                    return;
-
-                $(element).toggle();
-            }
-
-            function moveElement(e, element){
-                e.stopPropagation();
-                if(element.classList.contains("modalHeader"))
-                    element = element.parentElement;
-                $(element).data('offSetX', e.offsetX);
-                $(element).data('offSetY', e.offsetY);
-                
-                document.onmousemove = function(f){
-                    setElementToEventCoords(f, element);
-                }      
-
-                document.onmouseup = function(e){
-                    document.onmousemove = null;
-                }                
-            }       
-
-            function setElementToEventCoords(e, element){
-                    var offSetX = $(element).data('offSetX');
-                    var offSetY = $(element).data('offSetY');
-                    $(element).css({top: e.pageY - offSetY, left: e.pageX - offSetX});
-            }
-
-            function findClassFromChild(element, classToFind){
-                if(element.classList.contains(classToFind))
-                    return element;
-
-                if(element.parentElement === undefined)
-                    return undefined;
-
-                return findClassFromChild(element.parentElement, classToFind);
-            }
-
-            function changeModalContent(){
-                loadRemoteModalContent("helloWorld.html", "testModal");
-            }
+        
         </script>
 
-        <style>
-            .modalHeader{
-                height: 30px;
-                border-bottom: solid black 1px;
-            }
-
-            .modal{
-                border-radius: 5px;
-                position: absolute;
-                top: 100px;
-                left: 100px;
-                background-color: lightgray;
-                width: 450px;
-                height: 300px;
-                -webkit-touch-callout: none;
-                -webkit-user-select: none;
-                -khtml-user-select: none;
-                -moz-user-select: none;
-                -ms-user-select: none;
-                border: solid black 1px;
-            }
-
-            .modalCloseButton{
-                border-radius: inherit;
-                float: right;
-                padding: 5px 8px 6px 8px;
-                cursor: pointer;
-            }
-        </style>
+        <link rel="stylesheet" href="style/pechdo.css">
     </head>
 
     <body>
-        <button onclick="changeModalContent();">Change Modal Content</button>
-        <div id="testModal" class="modal">
+        <button onclick="loadRemoteModalContent('helloWorld.html', 'testModal')">Change Modal Content</button>
+        <!-- <div id="testModal" class="modal">
             <div id=testModalHeader class="modalHeader" onmousedown="moveElement(event, this)">
                 <div class="modalCloseButton" onmousedown="event.stopPropagation()" onclick="toggleElement(event, findClassFromChild(this, 'modal'))">X</div>
             </div>
             <div id=testModalContent>
                 modal content
             </div>
-        </div>
+        </div> -->
+        <div id="testModal2"></div>
+        <div id="testModal3"></div>
     </body>
 </html>

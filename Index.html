@@ -23,7 +23,7 @@
             }
 
             function moveElement(e, element){
-                cancelParentOnMouseDown(e);
+                e.stopPropagation();
                 if(element.classList.contains("modalHeader"))
                     element = element.parentElement;
                 $(element).data('offSetX', e.offsetX);
@@ -52,10 +52,6 @@
                     return undefined;
 
                 return findClassFromChild(element.parentElement, classToFind);
-            }
-
-            function cancelParentOnMouseDown(e){
-                e.stopPropagation();
             }
 
             function changeModalContent(){
@@ -98,7 +94,7 @@
         <button onclick="changeModalContent();">Change Modal Content</button>
         <div id="testModal" class="modal">
             <div id=testModalHeader class="modalHeader" onmousedown="moveElement(event, this)">
-                <div class="modalCloseButton" onmousedown="cancelParentOnMouseDown(event);" onclick="toggleElement(event, findClassFromChild(this, 'modal'))">X</div>
+                <div class="modalCloseButton" onmousedown="event.stopPropagation()" onclick="toggleElement(event, findClassFromChild(this, 'modal'))">X</div>
             </div>
             <div id=testModalContent>
                 modal content

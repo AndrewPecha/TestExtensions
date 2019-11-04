@@ -8,9 +8,9 @@ function createWindow(options) {
 
     $('#' + settings.modalId).addClass('modal').html(
             "<div id=\'" + settings.modalId + "Header\' class=\'modalHeader\' onmousedown=\'moveElement(event, this)\'>" +
-                "<div class='modalCloseButton' onmousedown='event.stopPropagation()' onclick='toggleElement(event, findClassFromChild(this, \'modal\'))'>X</div>" +
+                "<div class='modalCloseButton' onmousedown='event.stopPropagation()' onclick='toggleElement(event, findClassFromChild(this, \"modal\"))'>X</div>" +
             "</div>" +
-            "<div id=testModalContent>" +
+            "<div id='" + settings.modalId + "Content'>" +
                 settings.modalContent +
             "</div>"
     );

@@ -6,14 +6,44 @@ function createWindow(options) {
         modalContent: ""
     }, options);
 
+    var modalContentId = getModalContentId(settings.modalId);
+
     $('#' + settings.modalId).addClass('modal').html(
-            "<div id=\'" + settings.modalId + "Header\' class=\'modalHeader\' onmousedown=\'moveElement(event, this)\'>" +
+            "<div id=\'" + getModalHeaderId(settings.modalId) + "'\' class=\'modalHeader\' onmousedown=\'moveElement(event, this)\'>" +
                 "<div class='modalCloseButton' onmousedown='event.stopPropagation()' onclick='toggleElement(event, findClassFromChild(this, \"modal\"))'>X</div>" +
             "</div>" +
-            "<div id='" + settings.modalId + "Content'>" +
+            "<div id='" + modalContentId + "'>" +
                 settings.modalContent +
             "</div>"
     );
+    
+    setModalContentSize(settings.modalId);
+}
+
+function setModalContentSize(modalId){
+    var modalContentId = getModalContentId(modalId);
+    var modalHeaderId = getModalHeaderId(modalId);
+
+    var modalElement = document.getElementById(modalId);
+    var contentElement = document.getElementById(modalContentId);
+    var headerElement = document.getElementById(modalHeaderId);
+
+    //get parent height, get header height, get border width of modal, then (parentHeight - headerHeight - borderWidth == contentHeight)
+    var modalHeight = Number(getComputedStyle(modalElement).height.substring(0, getComputedStyle(modalElement).height.length - 2));
+    var headerheight = Number(getComputedStyle(headerElement).height.substring(0, getComputedStyle(headerElement).height.length - 2));
+    //todo need to change this when users can set the border
+    var borderWidth = 1;
+    var contentHeight = modalHeight - headerheight - borderWidth;
+
+    contentElement.style.height = contentHeight;
+}
+
+function getModalHeaderId(modalId){
+    return modalId + "Header";
+}
+
+function getModalContentId(modalId){
+    return modalId + "Content";
 }
 
 function loadRemoteModalContent(url, modalId){

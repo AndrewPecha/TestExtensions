@@ -1,0 +1,77 @@
+<html>
+    <head>
+        <style>
+            .square {
+                width: 250px;
+                height: 250px;
+                margin: 1rem 0 2rem 1rem;
+                background-color: blue;	
+            }
+
+            /* Blue to green */
+            #color .square {
+                background-color: blue;
+                -webkit-transition-property: background-color;
+                -moz-transition-property: background-color;
+                -o-transition-property: background-color;
+                -ms-transition-property: background-color;
+                transition-property: background-color;
+
+                -webkit-transition-duration: 1s;
+                -moz-transition-duration: 1s;
+                -o-transition-duration: 1s;
+                -ms-transition-duration: 1s;
+                transition-duration: 1s;
+            }
+
+            #color .square:hover {
+                background-color: green;
+            }
+
+
+            /* Square to circle */
+            /* transition-property transition-duration transition-delay */
+            #circle .square {
+                border-radius: 0;
+                -webkit-transition: border-radius 1s 2s, background-color 3s 2s;
+                -moz-transition: border-radius 1s 2s, background-color 3s 2s;
+                -o-transition: border-radius 1s 2s, background-color 3s 2s;
+                -ms-transition: border-radius 1s 2s, background-color 3s 2s;
+                transition: border-radius 1s 2s, background-color 3s 2s;
+            }
+
+            #circle .square:hover { 
+                border-radius: 50%;
+                background-color: purple;
+            }
+
+            
+        </style>
+    </head>
+    <body>
+        <h1>CSS Transition Fundamentals | Demos</h1>
+
+
+        <!-- Blue to green -->
+        <section id='color'>
+
+             <h3>Blue to green</h3>
+
+            <div class='square'>
+            </div>
+
+        </section><hr>
+
+
+
+        <!-- Square to circle-->
+        <section id='circle'>
+
+            <h3>Square to circle</h3>
+
+            <div class='square'>
+            </div>
+
+        </section><hr>
+    </body>
+</html>

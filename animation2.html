@@ -8,60 +8,99 @@
         
         <style>
             section, h1 {
-                margin: 2rem 4rem; 
-            }
-
-            .square {
-                width: 150px;
-                height: 150px;
-                background: blue;	
-                position: relative;
-            }
-
-
-            /* The skew() method */
-            #skew .square {
-                background-color: purple;
-            }
+ margin: 2rem 4rem; 
+}
+.square {
+	width: 150px;
+	height: 150px;
+	background: blue;	
+  position: relative;
+}
 
 
-            #skew .square:hover {  
-
-            }
-            
-
-            /* The scale() method */
-            #scale .square div { 
-                background: #000;  
-                position: absolute;
-                left: 25%;
-                top: 25%;
-                width: 75px;
-                height: 75px;
-            }
-
-            #scale .square div:hover {
-
-            }
-
-            /* The rotate() method */
-            #rotate .square {
-                background-color: tomato;
-            }
-
-            #rotate .square:hover {   
-
-            }
+/* The skew() method */
+#skew .square {
+  background-color: purple;
+  -webkit-transition: transform 5s;
+  -moz-transition: transform 5s;
+  -o-transition: transform 5s;
+  -ms-transition: transform 5s;
+  transition: transform 5s;
+}
 
 
-            /* The translate() method */
-            #translate .square {
-                background-color: orange;
-            }
+#skew .square:hover { 
+ -webkit-transform: skewX(-20deg); 
+ -moz-transform: skewX(-20deg);
+ -o-transform: skewX(-20deg);  
+ -ms-transform: skewX(-20deg); 
+ transform: skewX(-20deg);
+}
+  
 
-            #translate .square:hover { 
+/* The scale() method */
+#scale .square div { 
+   background: #000;  
+   position: absolute;
+   left: 25%;
+   top: 25%;
+   width: 75px;
+   height: 75px;
+   -webkit-transition: transform 5s, background-color 2s 1s;
+   -moz-transition: transform 5s, background-color 2s 1s;
+   -o-transition: transform 5s, background-color 2s 1s;
+   -ms-transition: transform 5s, background-color 2s 1s;
+   transition: transform 5s, background-color 2s 1s;
+}
 
-            }
+#scale .square div:hover {
+  background-color: blue;
+  -webkit-transform: scale(2,2);
+  -moz-transform: scale(2,2);
+  -o-transform: scale(2,2);
+  -ms-transform: scale(2,2);
+  transform: scale(2,2);
+}
+
+/* The rotate() method */
+#rotate .square {
+  background-color: tomato;
+  -webkit-transition: transform 5s;
+  -moz-transition: transform 5s;
+  -o-transition: transform 5s;
+  -ms-transition: transform 5s;
+  transition: transform 5s;
+}
+
+#rotate .square:hover { 
+ -webkit-transform: rotate(360deg);
+ -moz-transform: rotate(360deg);
+ -o-transform: rotate(360deg);
+ -ms-transform: rotate(360deg);  
+ transform: rotate(360deg);
+}
+
+
+/* The translate() method */
+#translate .square {
+  background-color: orange;
+  -webkit-transition: transform 5s ease-in, background 3s 2s;
+  -moz-transition: transform 5s ease-in, background 3s 2s;
+  -o-transition: transform 5s ease-in, background 3s 2s;
+  -ms-transition: transform 5s ease-in, background 3s 2s;
+  transition: transform 5s ease-in, background 3s 2s;
+
+}
+
+#translate .square:hover { 
+ background-color: green;
+ -webkit-transform: translateX(900px) rotate(360deg);
+ -moz-transform: translateX(900px) rotate(360deg);
+ -o-transform: translateX(900px) rotate(360deg);
+ -ms-transform: translateX(900px) rotate(360deg);
+ transform: translateX(900px) rotate(360deg);
+}
+
         </style>
     </head>
     <body>

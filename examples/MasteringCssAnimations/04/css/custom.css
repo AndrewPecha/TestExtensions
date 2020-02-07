@@ -1,0 +1,39 @@
+
+#top-container {
+	background:#0bc770;
+	min-height:800px;
+	padding: 230px 0;
+}
+
+#block {
+	display:block;
+	margin: 0 auto;
+	width:200px;
+	height:200px;
+	background:#fff url(../images/block.png) no-repeat 43px;
+	animation-name: fadeIn;
+	-webkit-animation-name: fadeIn;
+}
+
+.animated {
+	animation-duration: 1s;
+	-webkit-animation-duration: 1s;
+	animation-iteration-count: infinite;
+	-webkit-animation-iteration-count: infinite;
+}
+
+@keyframes fadeIn {
+	0% { opacity: 0; width: 100px; height: 100px; }
+	25% { opacity: 1; }
+	50% { opacity: .5; width: 200px; height: 200px; }
+	90% { opacity: 1; }
+	100% { opacity: 0; width: 0px; height: 0px;}
+}
+
+@-webkit-keyframes fadeIn {
+	0% { opacity: 0; width: 100px; height: 100px; }
+	25% { opacity: 1; }
+	50% { opacity: .5; width: 200px; height: 200px; }
+	90% { opacity: 1; }
+	100% { opacity: 0; width: 0px; height: 0px;}
+}
